@@ -55,6 +55,27 @@ namespace E2eTodolistTest
 			Assert.AreEqual(deletedworking, true, "Deleting is not working properly!");
 			
 		}
+		[Test]
+		public void TestEmptyAdd()
+		{
+			var input = _driver.FindElement(inputTask);
+			input.SendKeys("");
+			var add = _driver.FindElement(addButton);
+			bool alertFound = true;
+
+			Thread.Sleep(1000);
+			add.Click();
+			try
+			{
+				_driver.SwitchTo().Alert();
+			}   
+			catch (NoAlertPresentException Ex)
+			{
+				alertFound = false;
+			}
+			Assert.AreEqual(alertFound, true, "Alert is not working properly!");
+
+		}
 		[TearDown]
 		public void TearDown()
 		{
